@@ -1,0 +1,28 @@
+{
+  "name": "nodejs-testes",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://henriqueweiand@github.com/henriqueweiand/nodejs-testes.git"
+  },
+  "author": "henriqueweiand",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/henriqueweiand/nodejs-testes/issues"
+  },
+  "homepage": "https://github.com/henriqueweiand/nodejs-testes#readme",
+  "devDependencies": {
+    "eslint": "^5.14.1",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.16.0"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4"
+  }
+}
