@@ -33,6 +33,7 @@ routes.get('/app/dashboard', controllers.dashboardController.index);
 /**
  * Documents
  */
+routes.get('/app/documents', controllers.documentController.index);
 routes.get('/app/documents/:id', controllers.documentController.show);
 routes.post('/app/documents/create', controllers.documentController.store);
 

@@ -4,10 +4,10 @@ module.exports = (sequelize, dataTypes) => {
     UserId: dataTypes.INTEGER,
   });
 
-  // Document.associate = (models) => {
-  //   Document.belongsTo(models.Department);
-  //   Document.hasMany(models.Category);
-  // };
+  Document.associate = (models) => {
+    Document.hasMany(models.Department);
+    Document.hasMany(models.Category);
+  };
 
   return Document;
 };

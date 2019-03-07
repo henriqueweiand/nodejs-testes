@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   Department.associate = (models) => {
-    Department.hasMany(models.Document);
+    Department.belongsTo(models.Document);
   };
 
   return Department;

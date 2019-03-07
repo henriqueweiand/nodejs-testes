@@ -1,16 +1,29 @@
 const { Document, Category, Department } = require('../models');
 
 module.exports = {
-  async show(req, res, next) {
+  async index(req, res, next) {
     try {
-      const { id } = req.params;
-
       const documents = await Document.findAll({
         where: { UserId: req.session.user.id },
         include: [Category, Department],
       });
 
-      res.render('documents/show', { DocumentId: id, documents });
+      res.render('documents/index', { documents });
+    } catch (err) {
+      next(err);
+    }
+  },
+
+  async show(req, res, next) {
+    try {
+      const { id } = req.params;
+
+      const documents = await Document.findAll({
+        where: { UserId: req.session.user.id, id },
+        include: [Category, Department],
+      });
+
+      res.render('documents/show', { documents });
     } catch (err) {
       next(err);
     }
