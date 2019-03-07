@@ -29,6 +29,10 @@ module.exports = {
     }
   },
 
+  create(req, res) {
+    res.render('documents/create');
+  },
+
   async store(req, res, next) {
     try {
       const document = await Document.create({ ...req.body, UserId: req.session.user.id });

@@ -48,7 +48,7 @@ module.exports = {
 
       req.session.user = user;
 
-      return res.redirect('app/dashboard');
+      return res.redirect('app/documents');
     } catch (err) {
       return next(err);
     }
