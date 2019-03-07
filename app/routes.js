@@ -39,12 +39,12 @@ routes.post('/app/documents/create', controllers.documentController.store);
 /**
  * Category
  */
-routes.post('/app/category/create', controllers.categoryController.store);
+routes.post('/app/categories/create', controllers.categoryController.store);
 
 /**
  * Department
  */
-routes.post('/app/department/create', controllers.departmentController.store);
+routes.post('/app/departments/create', controllers.departmentController.store);
 
 // catch 404
 routes.use((req, res) => res.render('errors/404'));

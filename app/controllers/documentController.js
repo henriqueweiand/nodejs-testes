@@ -1,4 +1,4 @@
-const { Document } = require('../models');
+const { Document, Category, Department } = require('../models');
 
 module.exports = {
   async show(req, res, next) {
@@ -7,6 +7,7 @@ module.exports = {
 
       const documents = await Document.findAll({
         where: { UserId: req.session.user.id },
+        include: [Category, Department],
       });
 
       res.render('documents/show', { DocumentId: id, documents });
