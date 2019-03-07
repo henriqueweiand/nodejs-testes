@@ -1,6 +1,6 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    queryInterface.createTable('Sessions', {
+    const SessionsTable = queryInterface.createTable('Sessions', {
       sid: {
         allowNull: false,
         primaryKey: true,
@@ -17,6 +17,8 @@ module.exports = {
         type: Sequelize.DATE,
       },
     });
+
+    return SessionsTable;
   },
 
   down: queryInterface => queryInterface.dropTable('Sessions'),
