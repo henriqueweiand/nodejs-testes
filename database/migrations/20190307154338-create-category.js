@@ -7,13 +7,6 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      DocumentId: {
-        type: Sequelize.INTEGER,
-        references: { model: 'Documents', key: 'id' },
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE',
-        allowNull: false,
-      },
       title: {
         allowNull: false,
         type: Sequelize.STRING,

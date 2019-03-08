@@ -1,11 +1,32 @@
 {% extends "layouts/default.njk" %}
 
 {% block body %}
+  <a href="/app/documents/create" class="btn btn-primary">Criar</a>
 
-  {% for document in documents %}
-    {{document.title}}
-  {% endfor %}
-
-  <a href="documents/create">Criar novo</a>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Código</th>
+        <th scope="col">Titulo</th>
+        <th scope="col">Departamento</th>
+        <th scope="col">Categoria</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for document in documents %}
+        <tr>
+          <th scope="row">{{document.id}}</th>
+            <td>{{document.title}}</td>
+            <td>{{document.department}}</td>
+            <td>{{document.category}}</td>
+            <td>
+              <a href="/app/documents/{{document.id}}" class="btn btn-link">Atualizar</a>
+              <a class="btn btn-link">Remover</a>
+            </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
 
 {% endblock %}

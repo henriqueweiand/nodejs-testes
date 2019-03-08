@@ -30,7 +30,8 @@ routes.post('/authenticate', controllers.authController.authenticate);
 routes.get('/app/documents', authMiddleware, controllers.documentController.index);
 routes.get('/app/documents/create', authMiddleware, controllers.documentController.create);
 routes.get('/app/documents/:id', authMiddleware, controllers.documentController.show);
-routes.post('/app/documents/create', authMiddleware, controllers.documentController.store);
+routes.post('/app/documents', authMiddleware, controllers.documentController.store);
+// routes.put('/app/documents', authMiddleware, controllers.documentController.update);
 
 /**
  * Category

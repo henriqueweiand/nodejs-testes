@@ -1,11 +1,17 @@
-const { Document, Category, Department } = require('../models');
+const {
+  Document,
+  DocumentCategory,
+  DocumentDepartment,
+  Department,
+  Category,
+} = require('../models');
 
 module.exports = {
   async index(req, res, next) {
     try {
       const documents = await Document.findAll({
         where: { UserId: req.session.user.id },
-        include: [Category, Department],
+        include: [DocumentCategory, DocumentDepartment],
       });
 
       res.render('documents/index', { documents });
@@ -20,7 +26,7 @@ module.exports = {
 
       const documents = await Document.findAll({
         where: { UserId: req.session.user.id, id },
-        include: [Category, Department],
+        include: [DocumentCategory, DocumentDepartment],
       });
 
       res.render('documents/show', { documents });
@@ -29,17 +35,32 @@ module.exports = {
     }
   },
 
-  create(req, res) {
-    res.render('documents/create');
+  async create(req, res, next) {
+    try {
+      const departments = await Department.findAll();
+      const categories = await Category.findAll();
+
+      res.render('documents/create', { categories, departments });
+    } catch (err) {
+      next(err);
+    }
   },
 
   async store(req, res, next) {
     try {
       const document = await Document.create({ ...req.body, UserId: req.session.user.id });
+      await Category.create({
+        CategoryId: req.body.category,
+        DocumentId: document.id,
+      });
+      await Department.create({
+        DepartmentId: req.body.department,
+        DocumentId: document.id,
+      });
 
-      req.flash('success', 'Categoria criada com sucesso');
+      req.flash('success', 'Documento criado com sucesso');
 
-      res.redirect(`/app/documents/${document.id}`);
+      res.redirect('/app/documents');
     } catch (err) {
       next(err);
     }

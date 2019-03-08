@@ -1,11 +1,10 @@
 module.exports = (sequelize, DataTypes) => {
   const Category = sequelize.define('Category', {
     title: DataTypes.STRING,
-    DocumentId: DataTypes.INTEGER,
   });
 
   Category.associate = (models) => {
-    Category.belongsTo(models.Document);
+    Category.belongsTo(models.DocumentCategory);
   };
 
   return Category;

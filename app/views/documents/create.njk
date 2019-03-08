@@ -1,1 +1,41 @@
-create
+{% extends "layouts/auth.njk" %}
+
+{% block body %}
+  <form method="POST" action="/app/documents">
+    <h1 class="mb-4">Cadastro documento</h1>
+
+    <div class="form-group">
+      <label for="titulo">Titulo</label>
+      <input id="titulo" name="title" type="text" class="form-control" placeholder="Digite seu e-mail" required="required" autofocus="autofocus">
+    </div>
+
+    <div class="form-group">
+      <label for="categoria">Categoria</label>
+      <select class="form-control js-example-basic-single"  name="categoria[]" multiple="multiple">
+        {% for category in categories %}
+          <option value="{{category.id}}">{{category.title}}</option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="departamento">Departamento</label>
+      <select required="required" class="form-control" id="departamento" name="departamento">
+        <option value="">Selecione</option>
+        {% for department in departments %}
+          <option value="{{department.id}}">{{department.title}}</option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Cadastrar</button>
+  </form>
+{% endblock %}
+
+{% block script %}
+<script>
+  $(document).ready(function() {
+    $('.js-example-basic-single').select2();
+  });
+</script>
+{% endblock %}

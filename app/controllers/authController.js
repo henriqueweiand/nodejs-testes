@@ -23,7 +23,7 @@ module.exports = {
 
       await User.create({ ...req.body, password });
 
-      req.flash('success', 'Usuário cadastrado com sucesso');
+      res.flash('success', 'Usuário cadastrado com sucesso');
       return res.redirect('/');
     } catch (err) {
       return next(err);
@@ -47,7 +47,6 @@ module.exports = {
       }
 
       req.session.user = user;
-
       return res.redirect('app/documents');
     } catch (err) {
       return next(err);
