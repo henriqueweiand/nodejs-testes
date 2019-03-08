@@ -28,20 +28,20 @@ routes.post('/authenticate', controllers.authController.authenticate);
  * Documents
  */
 routes.get('/app/documents', authMiddleware, controllers.documentController.index);
-routes.get('/app/documents/create', authMiddleware, controllers.documentController.create);
-routes.get('/app/documents/:id', authMiddleware, controllers.documentController.show);
-routes.post('/app/documents', authMiddleware, controllers.documentController.store);
+// routes.get('/app/documents/create', authMiddleware, controllers.documentController.create);
+// routes.get('/app/documents/:id', authMiddleware, controllers.documentController.show);
+// routes.post('/app/documents', authMiddleware, controllers.documentController.store);
 // routes.put('/app/documents', authMiddleware, controllers.documentController.update);
 
 /**
  * Category
  */
-routes.post('/app/categories/create', authMiddleware, controllers.categoryController.store);
+// routes.post('/app/categories/create', authMiddleware, controllers.categoryController.store);
 
 /**
  * Department
  */
-routes.post('/app/departments/create', authMiddleware, controllers.departmentController.store);
+// routes.post('/app/departments/create', authMiddleware, controllers.departmentController.store);
 
 // catch 404
 routes.use((req, res) => res.render('errors/404'));

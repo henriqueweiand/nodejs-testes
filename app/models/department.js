@@ -4,7 +4,11 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   Department.associate = (models) => {
-    Department.belongsTo(models.DocumentDepartment);
+    Department.belongsToMany(models.Document, {
+      through: models.DocumentDepartment,
+      as: 'documents',
+      foreignKey: 'DepartmentId',
+    });
   };
 
   return Department;

@@ -4,7 +4,11 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   Category.associate = (models) => {
-    Category.belongsTo(models.DocumentCategory);
+    Category.belongsToMany(models.Document, {
+      through: models.DocumentCategory,
+      as: 'documents',
+      foreignKey: 'CategoryId',
+    });
   };
 
   return Category;

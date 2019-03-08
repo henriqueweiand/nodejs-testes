@@ -5,8 +5,16 @@ module.exports = (sequelize, dataTypes) => {
   });
 
   Document.associate = (models) => {
-    Document.belongsToMany(models.Department, { through: models.DocumentDepartment });
-    Document.belongsToMany(models.Category, { through: models.DocumentCategory });
+    Document.belongsToMany(models.Department, {
+      through: models.DocumentDepartment,
+      as: 'departments',
+      foreignKey: 'DepartmentId',
+    });
+    Document.belongsToMany(models.Category, {
+      through: models.DocumentCategory,
+      as: 'categories',
+      foreignKey: 'CategoryId',
+    });
   };
 
   return Document;

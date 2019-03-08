@@ -1,19 +1,24 @@
-const {
-  Document,
-  DocumentCategory,
-  DocumentDepartment,
-  Department,
-  Category,
-} = require('../models');
+const { Document, Department, Category } = require('../models');
 
 module.exports = {
   async index(req, res, next) {
     try {
       const documents = await Document.findAll({
         where: { UserId: req.session.user.id },
-        include: [DocumentCategory, DocumentDepartment],
+        include: [
+          {
+            model: Category,
+            as: 'categories',
+            through: { attributes: [] },
+          },
+          {
+            model: Department,
+            as: 'departments',
+            through: { attributes: [] },
+          },
+        ],
       });
-
+      console.log(JSON.stringify(documents));
       res.render('documents/index', { documents });
     } catch (err) {
       next(err);
@@ -26,7 +31,7 @@ module.exports = {
 
       const documents = await Document.findAll({
         where: { UserId: req.session.user.id, id },
-        include: [DocumentCategory, DocumentDepartment],
+        // include: [DocumentCategory, DocumentDepartment],
       });
 
       res.render('documents/show', { documents });

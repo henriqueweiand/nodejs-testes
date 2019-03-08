@@ -1,13 +1,8 @@
 module.exports = (sequelize, dataTypes) => {
-  const DocumentCategory = sequelize.define('DocumentCategories', {
+  const DocumentCategory = sequelize.define('DocumentCategory', {
     DocumentId: dataTypes.INTEGER,
     CategoryId: dataTypes.INTEGER,
   });
-
-  DocumentCategory.associate = (models) => {
-    DocumentCategory.hasMany(models.Document);
-    DocumentCategory.hasMany(models.Category);
-  };
 
   return DocumentCategory;
 };
