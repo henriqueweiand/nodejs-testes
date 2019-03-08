@@ -5,8 +5,8 @@ module.exports = (sequelize, dataTypes) => {
   });
 
   Document.associate = (models) => {
-    Document.hasMany(models.Department);
-    Document.hasMany(models.Category);
+    Document.belongsToMany(models.Department, { through: models.DocumentDepartment });
+    Document.belongsToMany(models.Category, { through: models.DocumentCategory });
   };
 
   return Document;
