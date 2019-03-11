@@ -1,0 +1,51 @@
+{% extends "layouts/auth.njk" %}
+
+{% block body %}
+
+  {% if documents['id'] %}
+    <form method="PUT" action="/app/documents">
+    <input name="documentId" type="hidden" value="{{documents['id']}}" />
+  {% else %}
+    <form method="POST" action="/app/documents">
+  {% endif %}
+    <h1 class="mb-4">Cadastro documento</h1>
+
+    <div class="form-group">
+      <label for="titulo">Titulo</label>
+      <input id="titulo" name="title" value="{{documents['title']}}" type="text" class="form-control" placeholder="Digite seu e-mail" required="required" autofocus="autofocus">
+    </div>
+
+    <div class="form-group">
+      <label for="category">Categoria</label>
+      <select class="form-control js-example-basic-single"  name="category" id="category" multiple="multiple">
+        {% for category in categories %}
+          <option value="{{category.id}}">{{category.title}}</option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="departamento">Departamento</label>
+      <select required="required" class="form-control" id="department" name="department">
+        <option value="">Selecione</option>
+        {% for department in departments %}
+          {% if department.id == documents['departments'][0]['id'] %}
+            <option selected value="{{department.id}}">{{department.title}}</option>
+          {% else %}
+            <option value="{{department.id}}">{{department.title}}</option>
+          {% endif %}
+        {% endfor %}
+      </select>
+    </div>
+
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Cadastrar</button>
+  </form>
+{% endblock %}
+
+{% block script %}
+<script>
+  $(document).ready(function() {
+    $('.js-example-basic-single').select2();
+  });
+</script>
+{% endblock %}

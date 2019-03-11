@@ -4,7 +4,7 @@ module.exports = {
   async index(req, res, next) {
     try {
       const documents = await Document.findAll({
-        // where: { UserId: req.session.user.id },
+        where: { UserId: req.session.user.id },
         include: [
           {
             model: Category,
@@ -28,13 +28,26 @@ module.exports = {
   async show(req, res, next) {
     try {
       const { id } = req.params;
+      const departments = await Department.findAll();
+      const categories = await Category.findAll();
 
-      const documents = await Document.findAll({
+      const documents = await Document.findOne({
         where: { UserId: req.session.user.id, id },
-        // include: [DocumentCategory, DocumentDepartment],
+        include: [
+          {
+            model: Category,
+            as: 'categories',
+            through: { attributes: [] },
+          },
+          {
+            model: Department,
+            as: 'departments',
+            through: { attributes: [] },
+          },
+        ],
       });
-
-      res.render('documents/show', { documents });
+      // console.log(documents);
+      res.render('documents/createOrUpdate', { documents, categories, departments });
     } catch (err) {
       next(err);
     }
@@ -45,7 +58,7 @@ module.exports = {
       const departments = await Department.findAll();
       const categories = await Category.findAll();
 
-      res.render('documents/create', { categories, departments });
+      res.render('documents/createOrUpdate', { categories, departments });
     } catch (err) {
       next(err);
     }
@@ -53,17 +66,43 @@ module.exports = {
 
   async store(req, res, next) {
     try {
-      const document = await Document.create({ ...req.body, UserId: req.session.user.id });
-      await Category.create({
-        CategoryId: req.body.category,
-        DocumentId: document.id,
-      });
-      await Department.create({
-        DepartmentId: req.body.department,
-        DocumentId: document.id,
-      });
+      const { department, category, ...data } = req.body;
+
+      const document = await Document.create({ ...data, UserId: req.session.user.id });
+
+      if (department && department.length > 0) {
+        document.setDepartments(department);
+      }
+
+      if (category && category.length > 0) {
+        document.setCategories(category);
+      }
 
       req.flash('success', 'Documento criado com sucesso');
+
+      res.redirect('/app/documents');
+    } catch (err) {
+      next(err);
+    }
+  },
+
+  async update(req, res, next) {
+    try {
+      const { id } = req.params;
+      const { department, category, ...data } = req.body;
+
+      const document = await Document.findById(id);
+      document.update(data);
+
+      if (department && department.length > 0) {
+        document.setDepartments(department);
+      }
+
+      if (category && category.length > 0) {
+        document.setCategories(category);
+      }
+
+      req.flash('success', 'Documento atualizado com sucesso');
 
       res.redirect('/app/documents');
     } catch (err) {
