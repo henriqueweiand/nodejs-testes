@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
 
   Department.associate = (models) => {
     Department.belongsToMany(models.Document, {
-      through: models.DocumentDepartment,
+      through: 'DocumentDepartments',
       as: 'documents',
       foreignKey: 'DepartmentId',
     });

@@ -18,8 +18,16 @@
         <tr>
           <th scope="row">{{document.id}}</th>
             <td>{{document.title}}</td>
-            <td>{{document.departments}}</td>
-            <td>{{document.categories}}</td>
+            <td>
+              {% for department in document.departments %}
+                {{department.title}}
+              {% endfor %}
+            </td>
+            <td>
+              {% for category in document.categories %}
+                {{category.title}}
+              {% endfor %}
+            </td>
             <td>
               <a href="/app/documents/{{document.id}}" class="btn btn-link">Atualizar</a>
               <a class="btn btn-link">Remover</a>

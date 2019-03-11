@@ -10,11 +10,11 @@ module.exports = (sequelize, dataTypes) => {
       as: 'departments',
       foreignKey: 'DocumentId',
     });
-    // Document.belongsToMany(models.Category, {
-    //   through: 'DocumentCategories',
-    //   as: 'categories',
-    //   foreignKey: 'CategoryId',
-    // });
+    Document.belongsToMany(models.Category, {
+      through: 'DocumentCategories',
+      as: 'categories',
+      foreignKey: 'DocumentId',
+    });
   };
 
   return Document;
