@@ -1,5 +1,5 @@
 module.exports = (sequelize, dataTypes) => {
-  const DocumentDepartments = sequelize.define('DocumentDepartment', {
+  const DocumentDepartments = sequelize.define('DocumentDepartments', {
     DocumentId: dataTypes.INTEGER,
     DepartmentId: dataTypes.INTEGER,
   });

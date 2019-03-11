@@ -4,7 +4,7 @@ module.exports = {
   async index(req, res, next) {
     try {
       const documents = await Document.findAll({
-        where: { UserId: req.session.user.id },
+        // where: { UserId: req.session.user.id },
         include: [
           {
             model: Category,
