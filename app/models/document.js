@@ -8,7 +8,7 @@ module.exports = (sequelize, dataTypes) => {
     Document.belongsToMany(models.Department, {
       through: 'DocumentDepartments',
       as: 'departments',
-      foreignKey: 'DepartmentId',
+      foreignKey: 'DocumentId',
     });
     // Document.belongsToMany(models.Category, {
     //   through: 'DocumentCategories',
