@@ -3,12 +3,13 @@
 {% block body %}
 
   {% if documents['id'] %}
-    <form method="PUT" action="/app/documents">
+    <form method="POST" action="/app/documents/update">
     <input name="documentId" type="hidden" value="{{documents['id']}}" />
+    <h1 class="mb-4">Atualização documento</h1>
   {% else %}
-    <form method="POST" action="/app/documents">
-  {% endif %}
+    <form method="POST" action="/app/documents/create">
     <h1 class="mb-4">Cadastro documento</h1>
+  {% endif %}
 
     <div class="form-group">
       <label for="titulo">Titulo</label>
@@ -46,6 +47,12 @@
 <script>
   $(document).ready(function() {
     $('.js-example-basic-single').select2();
+    $('.js-example-basic-single').val([
+      {% for category in documents.categories %}
+        {{category.id}},
+      {% endfor %}
+    ]);
+    $('.js-example-basic-single').trigger('change');
   });
 </script>
 {% endblock %}

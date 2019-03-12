@@ -27,8 +27,9 @@ routes.post('/authenticate', controllers.authController.authenticate);
 /**
  * Documents
  */
-routes.post('/app/documents', authMiddleware, controllers.documentController.store);
-// routes.put('/app/documents', authMiddleware, controllers.documentController.update);
+routes.post('/app/documents/create', authMiddleware, controllers.documentController.store);
+routes.post('/app/documents/update', authMiddleware, controllers.documentController.update);
+routes.get('/app/documents/:id/delete', authMiddleware, controllers.documentController.delete);
 
 routes.get('/app/documents', authMiddleware, controllers.documentController.index);
 routes.get('/app/documents/create', authMiddleware, controllers.documentController.create);

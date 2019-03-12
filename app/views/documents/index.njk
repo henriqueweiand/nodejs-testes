@@ -2,6 +2,7 @@
 
 {% block body %}
   <a href="/app/documents/create" class="btn btn-primary">Criar</a>
+  <a href="/signout" class="btn btn-primary">Deslogar</a>
 
   <table class="table">
     <thead>
@@ -30,7 +31,7 @@
             </td>
             <td>
               <a href="/app/documents/{{document.id}}" class="btn btn-link">Atualizar</a>
-              <a class="btn btn-link">Remover</a>
+              <a href="/app/documents/{{document.id}}/delete" class="btn btn-link">Remover</a>
             </td>
         </tr>
       {% endfor %}

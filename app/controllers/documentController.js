@@ -37,7 +37,7 @@ module.exports = {
           {
             model: Category,
             as: 'categories',
-            through: { attributes: [] },
+            through: { attributes: ['id'] },
           },
           {
             model: Department,
@@ -46,7 +46,6 @@ module.exports = {
           },
         ],
       });
-      // console.log(documents);
       res.render('documents/createOrUpdate', { documents, categories, departments });
     } catch (err) {
       next(err);
@@ -88,10 +87,9 @@ module.exports = {
 
   async update(req, res, next) {
     try {
-      const { id } = req.params;
       const { department, category, ...data } = req.body;
 
-      const document = await Document.findById(id);
+      const document = await Document.findById(data.documentId);
       document.update(data);
 
       if (department && department.length > 0) {
@@ -103,6 +101,21 @@ module.exports = {
       }
 
       req.flash('success', 'Documento atualizado com sucesso');
+
+      res.redirect('/app/documents');
+    } catch (err) {
+      next(err);
+    }
+  },
+
+  async delete(req, res, next) {
+    try {
+      const { id } = req.params;
+
+      const document = await Document.findById(id);
+      document.destroy();
+
+      req.flash('success', 'Documento removido com sucesso');
 
       res.redirect('/app/documents');
     } catch (err) {
